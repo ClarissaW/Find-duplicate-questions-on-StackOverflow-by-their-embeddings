@@ -13,13 +13,20 @@ def question_to_vec(question, embeddings, dim=300):
     for embedding in question.split(' '):
         if embedding in embeddings:
             question_vector.append(embeddings[embedding])
-
     if question == '' :
         return np.zeros(dim)
-    if length == 1 and question not in wv_embeddings:
+    if length == 1 and question not in embeddings:
         return np.zeros(dim)
     question_vector_array = np.array(question_vector)
     return question_vector_array.mean(axis=0)
+
+
+########################################  An easier way to do this ##########################################
+#    words_vector = [embeddings[embedding] for embedding in question.split() if embedding in embeddings]
+#    if not words_vector:
+#        return np.zeros(dim)
+#    words_vector = np.array(words_vector)
+#    return words_vector.mean(axis=0)
 
 
 #def question_to_vec_tests():
